@@ -1,0 +1,88 @@
+REDIS DATA STORE**********************
+Redis is not databse.
+Caching data.
+We can store JSON type data. Like key value pair.
+Some data we require frequently so redis save everything in RAM.Also make sure redis doesnt 
+make your system low on ram.
+
+In TERMINAL
+>REDIS-CLI
+Store key-value pair.
+value will always be string.
+>{key: "[1,2,4]"}
+
+Example data:
+{age:"28", name: "rachit"}
+>SET name rachit // this is key
+>GET name
+>SET age 28
+>DEL age
+>exists name //check key exists
+>exists age ==> 0 //No key
+
+>KEYS * //all keys
+>SET age 28
+>KEYS *  //show all
+>FLUSHALL //deletes everything
+>KEYS * //NOW became Empty
+>ttl name //check the last updated name
+>expire name 5 //expires memory after 5sec (returns -2 after expire)
+>setex name rachit //expiring at setting the data
+
+Stack and Queue as array {"john",##,###}
+lpush , rpush 
+lpop , rpop
+>lpush friends john //add at zero index in friends
+>GET friends //does not work on array only strings
+>LRANGE friends 0 -1 //for looping array and print from zero-last index
+
+>rpush friends Romy
+>LRANGE friends 0 -1
+>lpush friends arun
+>LRANGE friends 0 -1 
+
+>lpop friends 
+>rpop friends
+
+hobbies : ["weight lifing ","weight","w"]
+>SADD hobbies "weight lifting" //create set of hobbies
+>SADD hobbies "weight"
+>SADD hobbies "w"
+>SMEMBERS hobbies  //show all elemetns in hobbies 
+
+Adding Objects [we call the hashes]
+person: {age: "10"}
+>HSET person name rachit
+>HGET person name //value
+>HGETALL person   //key and value
+>HDEL person age
+>HEXISTS person age
+
+
+
+postGres is a database*******************************
+In TERMINAL
+sEMI COLON IS NECESSARY.
+>psql -U postgres;
+>CREATE USER ARUN with PASSWORD 'PASS';
+>CREATE DATABASE devs;
+>GRANT ALL PRIVILEGES ON DATABASE devs to ARUN;
+>DROP DATABASE devs
+database is a collection of tables.
+
+>\L CHECK ALL DATABASE
+>\C CONNECT TO DATABASE
+>\D TYPE OF COLUMNS OF DATA
+>\Q DROP OUT OF PSQL
+
+##CREATR TABLE
+
+>CREATE TABLE MYCOMPANY(
+>id INT NOT NULL,
+>name CHAR[50],
+>AGE INT,
+>address TEXT,
+>);
+>DROP TABLE MYCOMPANY;
+
+
