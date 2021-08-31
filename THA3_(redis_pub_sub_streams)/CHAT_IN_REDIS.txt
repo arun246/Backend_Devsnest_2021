@@ -1,0 +1,7 @@
+CHAT APPLICATION:
+
+TERM 1:
+subscribe empire
+
+TERM 2:
+publish empire [message]
