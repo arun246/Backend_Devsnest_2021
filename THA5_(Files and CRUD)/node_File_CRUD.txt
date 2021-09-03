@@ -1,0 +1,75 @@
+
+
+CREATE A FOLDER FOR NODEJS
+>NODE
+FOR IMPORTING FILE SYSTEM FUNCTIONS 
+>we will do REPL (read, execute , print , loop(repeat)) programming
+>var fs = require("fs");
+>fs.mkdirSync("THA5"); //make folder THA5
+//WRITE TO OUR FILE SYNC
+>fs.writeFileSync("THA5/hello.txt","hello how >are you all",(err) =>{
+>if(err){
+>console.log("THA5");
+>	}
+>});
+
+
+//append data to our file hello.txt SYNC
+>fs.appendFileSync("THA5/hello.txt","Welcome t our Learning Channel);
+
+//READ FILE //WE ALWAYS GET OUPUT IN SMALL BUFFERS //ALSO PROVIDE THE ENCODING
+>fs.readFileSync("THA5/hello.txt","utf-8");
+//STORE IN A VARIABLE
+>var n= fs.readFileSync("THA5/hello.txt","utf-8");
+>console.log(n);
+
+//REANAME FILE
+>fs.rename("THA5/hello.txt","THA5/hello2.txt");
+//UNLINK THE FILE AND DELETE THAT WE CREATED 
+>fs.unlinkSync("THA5/hello2.txt");
+
+//NOW WE DELETE THE DIR
+>fs.rmdirSync("THA5");
+>.exit //EXIT FROM NODE
+
+//CREATE A JS FILE 
+
+//index.js
+>var fs = require("fs");
+>fs.mkdirSync("day_1");
+>fs.witeFileSync("day_1/hello.txt","Hello Again");
+
+>goto this path /day_1 and run the command
+>node ./day_1/index.js
+
+
+//CREATE A FILE require_test.js as separate component
+
+class Test{
+
+	print(){
+		console.log("this is a required class");
+	     }
+	}
+
+class Test2{
+
+	print(){
+		console.log("this is not required class");
+	     }
+	}
+
+module.exports =Test; //exporting this class
+
+
+
+//CAREATE ANOTHER TEST_IMPORT.JS AND IMPORT COMPONENT
+test_import.js
+
+var Test = require("./require_test");
+var obj = new Test();
+console.log(obj.print());
+
+
+
+
