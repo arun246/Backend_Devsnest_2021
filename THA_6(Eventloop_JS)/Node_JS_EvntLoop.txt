@@ -1,0 +1,17 @@
+
+Javscript and need for evnt loop:
+>Browsers were not given all the system resources for processing in javascript. 
+>Event Loop is nothing but an algorithm that handles async nature of javascript.
+>Async nature in javascipt is when we dont wait for processing hungry task to be completed earlier in time . They are delayed untill all the small less hungry tasks are allowed to run first.   
+>Javascript is single threaded , non-blocking , Asynchronous, concurrent language executed in browser.
+> I have call stack, event loop , call back Queue and some other api and stuff.
+>Googles v8 engine is used to compile javascript very fast. It has only call-stack and heap only.
+
+
+HEAP ==> memory allocation
+Stack ==> Execution Context
+
+Javascript_Execution of Event loops:
+Web API calls ==> Queues all task calls in (FIFO) manner ==>Evnt loop==>call stack
+**************** Explanation :*******************
+ async Web api call happend in code ,all this calls gets into Callback_Queue ,Now if Call_Stack is empty Event_Loop takes one item from Callback_Queue and pushes it into Call_Stack to get executed

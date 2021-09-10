@@ -1,0 +1,134 @@
+Installing community packages from npm
+
+>npm install --save express
+
+>But first create .json for dependencies for the app
+>So we first create app and list dependencies for nodejs
+>npm init 
+-for versioning : 1.0.0 (major.minor.bug fixes)
+
+>for seeing live changes like live server in react in nodejs execution we have nodemon.
+
+>npm install save-dev nodemon (for dev env not prod env)
+
+we are doing server programming with data send with http methods. bropwser sends requests. We need to process it and give responses to client .
+
+keep in mind : security , performance, edge cases
+***************code index.js************
+
+const express = require('express');
+const app = express();
+
+const slash = (req,res)=> {
+res.send("hello");
+}
+
+
+*************For GET methods*************
+app.get('/',slash);
+app.get('/url',slash);
+app.listen(5000);
+
+*************other methods***************
+For checking these use POSTMAN software
+
+app.post('/',slash);
+app.put('/',slash);
+app.delete('/',slash);
+
+To run:
+go to chrome :localhost:5000
+
+Postman : localhost:5000/
+
+****************generically sending other things*********
+
+app.get('/',(req,res)=>{
+	res.send({a:"name"}); //sending objs 
+	res.send(a = []); //sending array
+
+});
+****************generically sending json************
+app.get('/',(req,res)=>{
+	res.sendStatus(200//400//500 http codes);//sending status 
+	res.send();   //sending message
+
+});
+
+***********pipelining*************
+app.get('/',(req,res)=>{
+	//db update
+	res.status(200).send("hello OR db not connecting");
+
+});
+
+***********http request variables*************
+
+app.get('/products',(req,res)=>{
+	
+	res.send(req.query.limit);
+});
+
+***********http req variables v2*************
+
+app.get('/ab?cd',(req,res)=>{ //for abcd or acd
+	
+	res.send('abcd');
+});
+***********http req variables v3*************
+
+app.get('/ab+cd',(req,res)=>{ //
+	
+	res.send('abcd');
+});
+
+***********http req variables v4*************
+
+app.get('/ab*cd',(req,res)=>{ //
+	
+	res.send('abcd');
+});
+
+***********http req variables v4*************
+
+app.get('/ab(cd)?',(req,res)=>{ //
+	
+	res.send('abcd');
+});
+***********http req variables v4*************
+
+app.get('/a/',(req,res)=>{ //regex
+	
+	res.send('abcd');
+});
+
+***********http req variables v5*************
+
+app.get('/.*fly$/',(req,res)=>{ //regex butterfly
+	
+	res.send('abcd');
+});
+
+***********http req variables v4*************
+
+app.get('/user/:usrid/books/:bkid',(req,res)=>{ 
+	console.log(req.query); //query var
+	res.send(req.params);   //dynamic var
+});
+*****************POSTMAN examples************
+localhost:5000/   GET
+localhost:5000/	POST
+localhost:5000/  PUT
+localhost:5000/  DELETE
+
+Sending varibles to server with get
+localhost:5000/products?limit=50&query=something
+
+changing varibles but same response
+localhost:5000/ab?cd
+
+variables multiple times in req
+localhost:5000/abbbbbbbbbbbbbcd
+
+variables starting with a req > /a/
+localhost:5000/abbbbbbbbbbbbbcd
