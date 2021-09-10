@@ -12,7 +12,7 @@ if(opts.fname){ //write to file
 fs.writeFileSync("THA5/"+opts.fname,"hello how are you all ");
 }
 if(opts.fname && opts.append ){ //append to file
-fs.appendFileSync("THA5/"+opts.fname,"\n Welcome to our Learning Channel");
+fs.appendFileSync("THA5/"+opts.fname,"\n"+opts.append);
 }
 if(opts.fname && opts.read ){ // read from file
 const n= fs.readFileSync("THA5/"+opts.fname,"utf-8");
@@ -26,6 +26,6 @@ fs.rmdirSync("THA5");
 // >npm install --save minimist
 // >node CRUD_CLI.js --dirname THA5
 // >node CRUD_CLI.js --fname hello.txt
-// >node CRUD_CLI.js --fname hello.txt -append
+// >node CRUD_CLI.js --fname hello.txt --append "mytext"
 // >node CRUD_CLI.js --fname hello.txt -read 
 // >node CRUD_CLI.js --fname hello.txt -del 
