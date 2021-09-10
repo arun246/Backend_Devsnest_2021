@@ -23,7 +23,8 @@ fs.unlinkSync("THA5/"+opts.fname);
 fs.rmdirSync("THA5");
 }
 // ************* To Execute this file use below commands ***************************
-// >node CRUD_CLI.js --dirname mydir
+// >npm install --save minimist
+// >node CRUD_CLI.js --dirname THA5
 // >node CRUD_CLI.js --fname hello.txt
 // >node CRUD_CLI.js --fname hello.txt -append
 // >node CRUD_CLI.js --fname hello.txt -read 
