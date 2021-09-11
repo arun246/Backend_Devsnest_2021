@@ -1,13 +1,15 @@
-Installing community packages from npm
-
->npm install --save express
-
+**************Installing community packages from npm********************
 >But first create .json for dependencies for the app
->So we first create app and list dependencies for nodejs
+>So we first create app and list dependencies for nodejs app
 >npm init 
 -for versioning : 1.0.0 (major.minor.bug fixes)
 
->for seeing live changes like live server in react in nodejs execution we have nodemon.
+Now,
+>npm install --save express
+
+
+
+>for seeing live changes while exec like live server in react, in nodejs  we have nodemon.
 
 >npm install save-dev nodemon (for dev env not prod env)
 
@@ -30,34 +32,34 @@ app.get('/url',slash);
 app.listen(5000);
 
 *************other methods***************
-For checking these use POSTMAN software
+For sending requests use POSTMAN software or Browser
 
 app.post('/',slash);
 app.put('/',slash);
 app.delete('/',slash);
 
 To run:
-go to chrome :localhost:5000
-
+go to chrome :localhost:5000/
+			OR
 Postman : localhost:5000/
 
-****************generically sending other things*********
+****************sending other res things*********
 
 app.get('/',(req,res)=>{
 	res.send({a:"name"}); //sending objs 
 	res.send(a = []); //sending array
 
 });
-****************generically sending json************
+**************** sending json************
 app.get('/',(req,res)=>{
 	res.sendStatus(200//400//500 http codes);//sending status 
-	res.send();   //sending message
+	res.send({a:"name"});   //sending message
 
 });
 
 ***********pipelining*************
 app.get('/',(req,res)=>{
-	//db update
+	//code for db update
 	res.status(200).send("hello OR db not connecting");
 
 });
@@ -122,7 +124,7 @@ localhost:5000/  PUT
 localhost:5000/  DELETE
 
 Sending varibles to server with get
-localhost:5000/products?limit=50&query=something
+localhost:5000/products?limit=50&qry=something
 
 changing varibles but same response
 localhost:5000/ab?cd
@@ -131,4 +133,4 @@ variables multiple times in req
 localhost:5000/abbbbbbbbbbbbbcd
 
 variables starting with a req > /a/
-localhost:5000/abbbbbbbbbbbbbcd
+localhost:5000/abbbcd
