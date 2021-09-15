@@ -15,14 +15,14 @@ Post request :
 ********************
 every //code should be inside index.js 
 
-//code
+//code 1
 app.get("/",(callback)(req,res)==>{
 	
 	res.json(req.query);
 
 });
 
-//code for next callback (AKA Middlewares are executed before other functions are exec)
+//code  2 for next callback (AKA Middlewares are executed before other functions are exec)
 
 app.get("/",(req,res,next)==>{
 	
@@ -33,7 +33,7 @@ app.get("/",(req,res,next)==>{
 	res.json(req.query);
 })
 
-//code
+//code 3
 const adminReq = (req,res,next)==>{ //middleware func to routing to diff func
 	
 	console.log("first call");
@@ -57,7 +57,7 @@ app.get("/",adminReq,sendResp);
 //code
 app.use(adminReq); // (common middleware like login check) here before every kind of requests the adminReq() is called
 
-//code
+//code 4
 Request goes from client: axios('/').then().catch();
 app.use(adminReq);
 const adminReq = (req,res,next)==>{ 
@@ -84,7 +84,7 @@ app.get("/",adminReq,sendResp);
 		
 
 
-//code
+//code 5
 app.use(body_parser.urlencoded({extended : true}));
 OR for JSOn
 app.use(body_parser.json());
