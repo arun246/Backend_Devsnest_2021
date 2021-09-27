@@ -1,0 +1,129 @@
+//redis Store --redis actions and reduce
+//redis client --used for connection 
+
+//npm i -s express-session redis connect-redis
+
+//redis for sesion recording and we need it fast
+
+
+>>>>>>>>>>>>>>>>>>>>/database/redis.js
+
+const redis =require("require");
+const connectRedis = require("connect-redis");
+const session = require("express-session");
+
+
+const RedisStore = connectRedis(session);
+
+const redisClient = redis.createClient({
+	host:"localhost",
+	port:6379
+});
+
+redisClient.on('error',function(err){
+	console.log("could not connect to redis",err);
+});
+
+redisClient.on('connect',function(){
+	console.log('connected to redis');
+});
+
+module.exports = {
+	redisClient,
+	RedisStore,
+	session
+}
+
+
+>>>>>>>>>>>>>>>>>>>app.js
+
+const {
+	redisClient,
+	RedisStore,
+	session
+} = require("./database/redis");
+
+app.use(session({
+	store: new RedisStore({client : redisClient}),
+	secret:"secret$%123",
+	resave:false,
+	saveUninitialized: false,
+	cookie:{
+	secure:false,
+	httpOnly:false,
+	maxAge: 1000*60*10
+	}
+	
+	}))
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>/routes/index.js
+router.get("/",function(req,res,next){
+//
+const sess = req.session;
+sess.username = "rachit";
+//
+});
+
+>>>>>>>>>>>>>>>>>>>>>>/databse/mongo.js
+
+npm -i -save mongodb mongoose(schemas and finalize data , similar to sequelize, extend columns u wantin mongoose )
+
+var mongoose = require("mongoose");
+
+var mongodb = "mongodb://127.0.0.1/my_database"; //coonect or create by default
+mongoose.connect(mopngodb,{useNewUrlParser : true, useUnifiedTopology: true}) //handle change with legacy code
+
+var db = mongoose.connection;
+
+db.on('error',console.error.bind(console,"Mongodb connection error"));
+
+>>>>>>>>>>>>>>>>>>>>>>>>>app.js
+
+require("./database/mongo") //importing all code here
+
+
+>>>>>>>>>>>>>>>>>>>>models/mongo_user.js
+
+const mongoose = require("mongoose');
+const Schema = mongoose.Scehema;
+
+const UserSchema = new Schema({
+	fullname: {type : String, default: ""},
+	email: {type: String,default: ""},
+	password: {type:String,default:""}
+	}) ;
+
+
+module.exports = User = mongoose.model("User",UserSchema)
+
+
+>>>>>>>>>>>>>>>>>>register.js
+
+const alreadyExists = await User.finOne({where:{email}}).exec();
+
+>>>>>>>>>>>>>>>>>>>POSTGRES WITHOUT SEQUELIZE
+
+>>>>>>>>>>>>>>>>>>>>>>>>routes/users.js
+
+const Pool = require("pg').Pool;
+
+const pool = new Pool({
+	user: "postgres",
+	host: "localhost",
+	database: "postgres",
+	password: "12346789",
+	port:5432
+})
+
+router.get("/",function(req,res,next){
+	pool.query('SELECT * FROm "Users"', (err,result) =>{
+	if(err){
+	throw err;
+	}
+	res.status(200).json(result);
+})
+});
+
+module.exports = router

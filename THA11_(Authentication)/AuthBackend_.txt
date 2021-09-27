@@ -1,0 +1,163 @@
+*****************Authentication
+>npx express-generator
+
+//@requires { email,firstname,lastname,password ,confirm pass } - req.body
+//@description
+//security ,performance and edge cases
+Level 1
+//email validate - .com , @ ,
+//pass ==confirm
+//password validate - 
+Level 2
+//JS / SQL -How to
+Level 3 
+//check email already exists
+//password hash
+//email to lowercase
+//save
+
+
+>>>>>>>>>>>>>>>>>>>>>/routes/index.js
+var registerInitialCheck = require('../middleware/registerChecks');
+var registerCtrl = require("../controllers/registerctrl")
+
+
+router.post("/register",registerInitialCheck,register);
+
+>>>>>>>>>>>>>>>>/middlewares/registerchecks.js
+
+//email validate - .com , @ ,
+//pass ==confirm
+
+const {
+	emailValidate,
+	passValidate    } = require("../utils/validate");
+const registerInitialchecks = (req,res,next)=>{
+	const {email, pass, confirmPass } = req.body;
+	if(typeof email =="string" &&
+	typeof pass =="string" &&
+	typeof confirmPass =="string" &&
+	email.length > 0 &&
+	pass.length > 8 &&
+	confirmPass === pass &&
+	emailValidate(email) &&
+	passValidfate(pass)	){
+	next();
+		}
+	res.status(401).send("Initial Check Failed");
+}
+
+
+module.exports  = registerInitialCheck;
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>/utils/validate.js
+
+const emailValidate = (email) =>{
+	const re = "***regex***";
+	return re.test(email);
+}
+
+const passValidate = (pass) =>{
+	var re = "***regex***";
+	return re.test(pass);
+}
+
+modules.exports = {
+	emailValidate,
+	passValidate
+}
+
+
+>>>>>>>>>>>>>>>>/controllers/register.js //actual logic for DB
+npm install -save bcrypt
+npm install --save pg
+require(bcrypt)
+LEVEL3
+//check email already exists
+//password hash
+//email to lowercase
+//save
+const saltRound = 10;
+const registerCtrl = (req,res) =>{
+const {email, pass} = req.body;
+try{
+	const alreadyExists = await user.findOne({where :{email}})
+	if(alreadyExists){	
+	res.status(401).send("Email already exists");
+	}
+	const salt  = bcrypt......(saltRounds);
+	const hash  = bcrypt.hashSync(pass,salt);	
+	
+	const newUser = new User({email: email.toLowerCase(), password: hash});
+	const savedUser = await newUser.save();
+	res.status(201).send(savedUser);
+}
+catch(err){
+	console.err(err);
+r	res.status(500).send("Somethings went wrong")
+	}
+
+}
+
+module.exports  = registerCtrl
+
+
+>>>>>>>>>>>>>>>>/database/index.js //ORM
+
+npm install --save sequelize
+const {sequelize} = require("sequelize");
+
+const sequelize = new Sequelize(
+	"postgres',
+	"postgres",
+	"pass",
+	{
+		host:"localhost",
+		dialect:"postgres/mysql/redis"
+	}
+
+);
+
+sequelize.sync();
+
+(async () => {
+	try{
+	await sequelize.authenticate();
+	consol.log("Connection estab with DB");
+	}
+
+	catch{
+		console.error("unable to connect to Db ")
+	}
+	})();
+
+module.exports = sequelize
+
+
+>>>>>>>>>>>>>>>>/models/user.js
+
+const {DataTypes} = require("sequelize");
+const sequelize = require("../database");
+
+const User = sequelize.define("User",{
+
+	fullName:{
+	type:DataTypes.STRING,
+	allowNull: false
+		},
+	email:{
+	type:DataTypes.STRING,
+	allowNull: false
+	},
+	pass:{
+	type:DataTypes.STRING,
+	allowNull: false
+	}
+	});
+
+module.exports = User
+>>>>>>>>>>>>>>>>/models
+
+
