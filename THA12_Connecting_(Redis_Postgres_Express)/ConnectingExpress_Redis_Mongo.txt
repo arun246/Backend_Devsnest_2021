@@ -11,6 +11,7 @@
 const redis =require("require");
 const connectRedis = require("connect-redis");
 const session = require("express-session");
+app.set('trust proxy',1);
 
 
 const RedisStore = connectRedis(session);
@@ -26,6 +27,36 @@ redisClient.on('error',function(err){
 
 redisClient.on('connect',function(){
 	console.log('connected to redis');
+});
+
+app.get('/', (req, res) => {
+    if(req.session.username && req.session.password) {
+        res.write(`<h1>Welcome username ${req.session.username}</h1>`);
+        res.write(`<h2>This is a home page</h2>`);
+        res.write(`<a href='/logout'>Logout</a>`);
+        res.end(`<h1>Success</h1>`);
+    } else {
+        res.status(401).json({
+            message : 'Not authorized'
+        })
+    }
+});
+
+app.post('/login', (req, res) => {
+    const session = req.session;
+    const {username, password} = req.body;
+    session.username = username;
+    session.password = password;
+    res.send('Success');
+});
+
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if(err) {
+            console.log(err);
+        }
+        res.redirect('/');
+    });
 });
 
 module.exports = {
@@ -54,7 +85,7 @@ app.use(session({
 	maxAge: 1000*60*10
 	}
 	
-	}))
+	}));
 
 
 
@@ -127,3 +158,32 @@ router.get("/",function(req,res,next){
 });
 
 module.exports = router
+
+
+
+**********************FOR REDIS client
+<html>
+    <head></head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function buttonClicked() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            $.post('https://localhost:3000/login', {
+                'username': username,
+                'password': password
+            }, function(data) {
+                if(data === Success) {
+                    window.location.href = '/';
+                }
+            })
+        }
+    </script>
+    <body>
+        <h1>Username</h1>
+        <input type="text" id="username">
+        <h1>Password</h1>
+        <input type="password" id="password">
+        <button onclick="buttonClicked()">Submit</button>
+    </body>
+</html>

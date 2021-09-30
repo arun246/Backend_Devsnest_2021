@@ -2,9 +2,9 @@
 
 >npm -i -s dotenv
 
->>>>>>>>>>>/.env  //not changing info for the whole app env
-PORT = 5000
->>>>>>>>>>>>.json //these files are for changing info
+>>>>>>>>>>>/.env  
+PORT = 5000		//static info for the whole app env
+>>>>>>>>>>>>.json //dynamic info is kept here
 
 >>>>>>>>>>/config/index.js
 require("dotenv").config();
@@ -34,7 +34,7 @@ module.exports = {
 	sequelize_password:process.env.SEQUELIZE_PASSWORD,
 	sequelize_host:process.env.SEQUELIZE_HOST,
 	sequelize_dialect:process.env.SEQUELIZE_DIALECT,
-	SECRET: process.env.SECRETs
+	SECRET: process.env.SECRETS
 	
 
 }
@@ -69,9 +69,9 @@ const User = require("../models/mongo");
 
 
 const registerSuperAdmin = async(req,res) =>{
-	//copy paste from register check
+	//copy paste from registercheck from authentcation tha
 
-add => {name :  , password:  , fullname : , role:"super-admin"	};
+replace with this line in there => {name :  , password:  , fullname : , role:"super-admin"	};
 
 }
 
@@ -104,9 +104,9 @@ const check =(req,res,next) =>{
 var check  = require("../middlewares/checkSuperAdmin");
 
 router.get("/super",check);
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>/contr/register.js
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>/controllers/register.js
 
-change ==> user.findone().exec() ==> .findone().exec()
+change ==> user.findone().exec() ==> .findone()
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>Install
 npm install passport passport-jwt
