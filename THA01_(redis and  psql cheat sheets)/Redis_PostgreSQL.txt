@@ -53,16 +53,17 @@ hobbies : ["weight lifing ","weight","w"]
 Adding Objects [we call the hashes]
 person: {age: "10"}
 >HSET person name rachit
->HGET person name //value
->HGETALL person   //key and value
+>HGET person name "value"
+>HGETALL person   "key" and "value"
 >HDEL person age
 >HEXISTS person age
 
 
 
 postGres is a database*******************************
-In TERMINAL
-sEMI COLON IS NECESSARY.
+
+SEMI COLON IS NECESSARY.
+
 >psql -U postgres;
 >CREATE USER ARUN with PASSWORD 'PASS';
 >CREATE DATABASE devs;

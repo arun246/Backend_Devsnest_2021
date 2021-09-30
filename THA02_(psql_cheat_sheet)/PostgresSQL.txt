@@ -2,10 +2,10 @@ DAY 2
 ################################################
 open command prompt
 >psql -h localhost -p 5432 -U postgres
-OR 
+			OR 
 >psql -u postgres
 
-Alwasys use ; for commands
+Alwasys use ; for PSQL commands
 
 #################################################
 

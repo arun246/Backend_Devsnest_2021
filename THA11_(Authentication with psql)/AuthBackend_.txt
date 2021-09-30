@@ -1,15 +1,18 @@
 *****************Authentication
 >npx express-generator
-
+						3 Tasks we going to do: 
 //@requires { email,firstname,lastname,password ,confirm pass } - req.body
 //@description
 //security ,performance and edge cases
+
 Level 1
 //email validate - .com , @ ,
 //pass ==confirm
-//password validate - 
+//password validate 
+
 Level 2
 //JS / SQL -How to
+
 Level 3 
 //check email already exists
 //password hash
@@ -19,7 +22,7 @@ Level 3
 
 >>>>>>>>>>>>>>>>>>>>>/routes/index.js
 var registerInitialCheck = require('../middleware/registerChecks');
-var registerCtrl = require("../controllers/registerctrl")
+var registerCtrl = require("../controllers/registerCtrl")
 
 
 router.post("/register",registerInitialCheck,register);
@@ -27,11 +30,12 @@ router.post("/register",registerInitialCheck,register);
 >>>>>>>>>>>>>>>>/middlewares/registerchecks.js
 
 //email validate - .com , @ ,
-//pass ==confirm
+//check pass == confirmPass
 
 const {
 	emailValidate,
 	passValidate    } = require("../utils/validate");
+
 const registerInitialchecks = (req,res,next)=>{
 	const {email, pass, confirmPass } = req.body;
 	if(typeof email =="string" &&
@@ -96,7 +100,7 @@ try{
 }
 catch(err){
 	console.err(err);
-r	res.status(500).send("Somethings went wrong")
+	res.status(500).send("Somethings went wrong")
 	}
 
 }
@@ -106,11 +110,12 @@ module.exports  = registerCtrl
 
 >>>>>>>>>>>>>>>>/database/index.js //ORM
 
-npm install --save sequelize
+>npm install --save sequelize
+
 const {sequelize} = require("sequelize");
 
 const sequelize = new Sequelize(
-	"postgres',
+	"postgres",
 	"postgres",
 	"pass",
 	{
@@ -125,7 +130,7 @@ sequelize.sync();
 (async () => {
 	try{
 	await sequelize.authenticate();
-	consol.log("Connection estab with DB");
+	console.log("Connection estab with DB");
 	}
 
 	catch{
@@ -158,6 +163,10 @@ const User = sequelize.define("User",{
 	});
 
 module.exports = User
->>>>>>>>>>>>>>>>/models
+
+
+***************************POSTMAN
+
+localhost:3000/register
 
 
