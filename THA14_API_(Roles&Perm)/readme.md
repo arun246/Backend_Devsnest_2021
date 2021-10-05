@@ -5,7 +5,7 @@ PORT = 5000		//static info for the whole app env
 >.json //dynamic info is kept here
 
 
->Dont use user(psql) or redis modules while using Mongo mudules 
+>Dont use user(psql)  modules while using Mongo mudules 
 
 
 
