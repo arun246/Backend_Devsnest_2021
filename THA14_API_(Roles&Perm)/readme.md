@@ -1,19 +1,21 @@
-*********************CONFIG MANAGEMENT
->Dont use user or redis modules while using Mongo mudules 
+###CONFIG MANAGEMENT
 >npm -i -s dotenv
-
->>>>>>>>>>>/.env  
+>/.env  
 PORT = 5000		//static info for the whole app env
->>>>>>>>>>>>.json //dynamic info is kept here
+>.json //dynamic info is kept here
 
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>Install
+>Dont use user(psql) or redis modules while using Mongo mudules 
+
+
+
+>Install
 npm install passport passport-jwt
 
 //for authentcation for Google and facebook
 //jwt is used for manually password entry
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>app.js //for kinds of strategy in authentication of Google or Facebook or Others
+>app.js //for kinds of strategy in authentication of Google or Facebook or Others
 
 const passport  = require("passport")
 
