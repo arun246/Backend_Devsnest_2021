@@ -7,7 +7,7 @@ PORT = 5000		//static info for the whole app env
 
 >Dont use user(psql)  modules while using Mongo mudules 
 
-
+###Applying roles and resource authorization with passport
 
 >Install
 npm install passport passport-jwt

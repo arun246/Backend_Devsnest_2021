@@ -1,0 +1,137 @@
+Pagination
+
+not sending all the data all of a sudden.
+
+>>>>>>>>>>>>>>>app.js
+app.use("/products", require("./routes/products"))
+
+>>>>>>>>>>>>>>>models/products.js
+const router = express.router() ;
+const {DataTypes }= require('sequelize')
+const sequelize = require("../database")
+module.exports = sequelize.define("products",{
+
+id:{
+type:DataTypes.BIGINT,
+allowNull:false,
+primaryKey: true,
+autoIncrement: true
+
+},
+title:{
+type:DataTypes.String,
+allowNull:false
+
+},
+price:{
+
+type:DataTypes.INTEGER,
+allowNull:false
+
+},
+
+count:{
+
+
+type:DataTypes.INTEGER,
+allowNull:false
+},
+description:{
+type:Datatypes.TEXT,
+
+},
+image:{
+
+type:DataTypes.BIGINT,
+}
+
+
+})
+
+>>>>>>>>>>>>>>>routes/produtcs.js
+const express = reqiure("express");
+const product = require("../models/productcs")
+const {Op} = require("sequelize")
+
+router.get("/" ,async(req,res)=>{
+
+try{
+	const query = req.query;
+const count = parseInt(query.count) || 10;
+const page = parseInt(query.page) || 1;
+const after = parseInt(query.after) ;
+
+let sql = {}
+	if(after){
+
+sql = {
+	where:{
+	Id:{	
+	[Op.gt]: after           //get all 10 items from after 
+		}
+	}
+
+}
+
+	}
+else{
+
+sql = {
+	offset:count*(page-1)
+}
+
+}
+const products = await product.findAll({ //findAll queries are already secure
+	...sql,
+	attribute:["id","title","price","description","image"]
+	limit:count
+
+});
+res.status(200).send({
+	count:products.length
+	Items:products
+})
+carch(err){
+
+console.error(err);
+res.status(500).send({
+	error:err,
+	message:"cannoot process your request"
+	})
+
+}
+
+
+})
+
+module.exports = router;
+
+
+
+
+>>>>>>>>>>>>>>>>>>>>>routes/index.js
+
+pool.query("Select * from Users wher id = {req.body.id}")
+
+//here we doint want sql query to be done with direct input from cliet side with edited queries can harm our DB
+
+
+pool.query("Select * from Users wher id =$1, [req.body.id],(err,res)==>{
+
+})
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>POSTMAN
+/products?count=1
+/users?id=1
+
+//use https for protecting from middleman with certs
+
+//work with DB with changing port, pass, dbname to be cautious
+
+
+
+
+
+
+
