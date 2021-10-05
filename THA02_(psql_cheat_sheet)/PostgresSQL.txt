@@ -1,6 +1,8 @@
 DAY 2
 ################################################
 open command prompt
+for windows 7
+>chcp 1252  //character correction
 >psql -h localhost -p 5432 -U postgres
 			OR 
 >psql -u postgres

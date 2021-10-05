@@ -1,5 +1,5 @@
 *****************Authentication
->npx express-generator
+>npx express-generator //project structure generator
 						3 Tasks we going to do: 
 //@requires { email,firstname,lastname,password ,confirm pass } - req.body
 //@description
@@ -20,14 +20,14 @@ Level 3
 //save
 
 
->>>>>>>>>>>>>>>>>>>>>/routes/index.js
+>>>>>>>>>>>>>>>>>>>>>/routes/index.js  //main routing to pages
 var registerInitialCheck = require('../middleware/registerChecks');
 var registerCtrl = require("../controllers/registerCtrl")
 
 
 router.post("/register",registerInitialCheck,register);
 
->>>>>>>>>>>>>>>>/middlewares/registerchecks.js
+>>>>>>>>>>>>>>>>/middlewares/registerchecks.js  // taks before running important functions
 
 //email validate - .com , @ ,
 //check pass == confirmPass
@@ -56,7 +56,7 @@ module.exports  = registerInitialCheck;
 
 
 
->>>>>>>>>>>>>>>>>>>>>>/utils/validate.js
+>>>>>>>>>>>>>>>>>>>>>>/utils/validate.js  //utilities ,functions
 
 const emailValidate = (email) =>{
 	const re = "***regex***";
@@ -74,7 +74,7 @@ modules.exports = {
 }
 
 
->>>>>>>>>>>>>>>>/controllers/register.js //actual logic interacting with DB
+>>>>>>>>>>>>>>>>/controllers/register.js //most usefull logical components //here actual logic interacting with DB 
 npm install --save bcrypt
 npm install --save pg
 require(bcrypt)
@@ -91,7 +91,7 @@ try{
 	if(alreadyExists){	
 	res.status(401).send("Email already exists");
 	}
-	const salt  = bcrypt......(saltRounds);
+	const salt = bcrypt.genSaltSync(saltRounds)
 	const hash  = bcrypt.hashSync(pass,salt);	
 	
 	const newUser = new User({email: email.toLowerCase(), password: hash});
@@ -108,7 +108,7 @@ catch(err){
 module.exports  = registerCtrl
 
 
->>>>>>>>>>>>>>>>/database/index.js //ORM
+>>>>>>>>>>>>>>>>/database/index.js //main ORM //Just change the database configs for diff DB
 
 >npm install --save sequelize
 
@@ -141,7 +141,7 @@ sequelize.sync();
 module.exports = sequelize
 
 
->>>>>>>>>>>>>>>>/models/user.js
+>>>>>>>>>>>>>>>>/models/user.js   //code generated schema for user table
 
 const {DataTypes} = require("sequelize");
 const sequelize = require("../database");
@@ -166,7 +166,7 @@ module.exports = User
 
 
 ***************************POSTMAN
-
+localhost:3000/
 localhost:3000/register
 
 

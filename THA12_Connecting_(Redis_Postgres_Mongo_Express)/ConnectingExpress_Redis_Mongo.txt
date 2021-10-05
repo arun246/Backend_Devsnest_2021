@@ -1,6 +1,11 @@
 //redis Store --redis actions and reduce
 //redis client --used for connection 
 
+>npx express-generator //directories setup
+
+start mongodb server Win7-32bit
+>mongod --dbpath "go to mongo/bin" --storageEngine "mmapv1" //for mongoDB service
+
 //npm i -s express-session redis connect-redis
 
 //redis for sesion recording and we need it fast
@@ -91,20 +96,23 @@ app.use(session({
 
 >>>>>>>>>>>>>>>>>>>>>>/routes/index.js
 router.get("/",function(req,res,next){
-//
+//....code
+
 const sess = req.session;
 sess.username = "rachit";
-//
+
+//....
 });
 
 >>>>>>>>>>>>>>>>>>>>>>/databse/mongo.js
 
-npm -i -save mongodb mongoose(schemas and finalize data , similar to sequelize, extend columns u wantin mongoose )
+npm -i -save mongodb mongoose ==> (for schemas and finalize data , similar to sequelize, 
+                                            extend columns in db )
 
 var mongoose = require("mongoose");
 
-var mongodb = "mongodb://127.0.0.1/my_database"; //coonect or create by default
-mongoose.connect(mopngodb,{useNewUrlParser : true, useUnifiedTopology: true}) //handle change with legacy code
+var mongodb = "mongodb://127.0.0.1/my_database"; //connect or create by default
+mongoose.connect(mongodb,{useNewUrlParser : true, useUnifiedTopology: true}) //handle change with legacy code
 
 var db = mongoose.connection;
 
